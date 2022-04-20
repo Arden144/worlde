@@ -1,0 +1,16 @@
+{
+	"[javascript][typescript]": {
+		"editor.defaultFormatter": "rome.rome",
+	},
+	"[css][scss]": {
+		"editor.suggest.insertMode": "replace",
+		"editor.defaultFormatter": "vscode.css-language-features"
+	},
+	"[html]": {
+		"editor.suggest.insertMode": "replace",
+		"editor.defaultFormatter": "vscode.html-language-features"
+	},
+	"[svelte]": {
+		"editor.defaultFormatter": "svelte.svelte-vscode"
+	}
+}
