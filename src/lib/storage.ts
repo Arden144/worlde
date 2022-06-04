@@ -1,11 +1,11 @@
 import { browser } from "$app/env";
-import { writable, type Writable } from "svelte/store";
 import { Color, type State } from "$lib/types";
 import { words } from "$lib/words";
+import { writable, type Writable } from "svelte/store";
 
-function hasOwnProperty<X extends {}, Y extends PropertyKey>(obj: X, prop: Y): obj is
-	& X
-	& Record<Y, unknown> {
+function hasOwnProperty<T, K extends PropertyKey>(obj: T, prop: K): obj is
+	& T
+	& Record<K, unknown> {
 	return Object.prototype.hasOwnProperty.call(obj, prop);
 }
 

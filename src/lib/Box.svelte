@@ -106,7 +106,7 @@
 			transform: translateY(-10px);
 		}
 		90% {
-			transform: translateY(5deg);
+			transform: translateY(5px);
 		}
 		100% {
 			transform: translateY(0px);
