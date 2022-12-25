@@ -9,6 +9,7 @@
         "format": "rome format src --write"
     },
     "devDependencies": {
+        "@sveltejs/adapter-auto": "^1.0.0",
         "@sveltejs/kit": "^1.0.1",
         "rome": "^11.0.0",
         "sass": "^1.57.1",
