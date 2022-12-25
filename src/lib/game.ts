@@ -4,97 +4,97 @@ import { words } from "$lib/words";
 import { produce } from "immer";
 
 export const game = {
-	...state,
+  ...state,
 
-	addLetter(char: string) {
-		this.update(
-			produce(($game) => {
-				const { row, guesses, solution, complete } = $game;
+  addLetter(char: string) {
+    this.update(
+      produce(($game) => {
+        const { row, guesses, solution, complete } = $game;
 
-				if (complete) {
-					return;
-				}
+        if (complete) {
+          return;
+        }
 
-				const guess = guesses[row];
-				if (guess === undefined) {
-					return;
-				}
+        const guess = guesses[row];
+        if (guess === undefined) {
+          return;
+        }
 
-				const { letters, col } = guess;
+        const { letters, col } = guess;
 
-				const letter = letters[col];
-				if (letter === undefined) {
-					return;
-				}
+        const letter = letters[col];
+        if (letter === undefined) {
+          return;
+        }
 
-				if (char === solution[col]) {
-					letter.color = Color.Correct;
-				} else if (solution.includes(char)) {
-					letter.color = Color.Present;
-				}
+        if (char === solution[col]) {
+          letter.color = Color.Correct;
+        } else if (solution.includes(char)) {
+          letter.color = Color.Present;
+        }
 
-				letter.char = char;
-				guess.col++;
-			}),
-		);
-	},
+        letter.char = char;
+        guess.col++;
+      }),
+    );
+  },
 
-	removeLetter() {
-		this.update(
-			produce(($game) => {
-				const { row, guesses, complete } = $game;
+  removeLetter() {
+    this.update(
+      produce(($game) => {
+        const { row, guesses, complete } = $game;
 
-				if (complete) {
-					return;
-				}
+        if (complete) {
+          return;
+        }
 
-				const guess = guesses[row];
-				if (guess === undefined) {
-					return;
-				}
+        const guess = guesses[row];
+        if (guess === undefined) {
+          return;
+        }
 
-				const { letters, col } = guess;
+        const { letters, col } = guess;
 
-				const letter = letters[col - 1];
-				if (letter === undefined) {
-					return;
-				}
+        const letter = letters[col - 1];
+        if (letter === undefined) {
+          return;
+        }
 
-				letter.color = Color.Absent;
-				letter.char = "";
-				guess.col--;
-			}),
-		);
-	},
+        letter.color = Color.Absent;
+        letter.char = "";
+        guess.col--;
+      }),
+    );
+  },
 
-	submitGuess() {
-		this.update(
-			produce(($game) => {
-				const { row, guesses, used, solution, complete } = $game;
+  submitGuess() {
+    this.update(
+      produce(($game) => {
+        const { row, guesses, used, solution, complete } = $game;
 
-				if (complete) {
-					return;
-				}
+        if (complete) {
+          return;
+        }
 
-				const guess = guesses[row];
-				if (guess === undefined) {
-					return;
-				}
+        const guess = guesses[row];
+        if (guess === undefined) {
+          return;
+        }
 
-				const word = guess.letters.map((letter) => letter.char).join("");
-				if (!words.has(word)) {
-					return;
-				}
+        const word = guess.letters.map((letter) => letter.char).join("");
+        if (!words.has(word)) {
+          return;
+        }
 
-				if (word === solution) {
-					guess.correct = true;
-					$game.complete = true;
-				}
+        if (word === solution) {
+          guess.correct = true;
+          $game.complete = true;
+        }
 
-				guess.letters.forEach(({ char }) => used.add(char));
-				guess.reveal = true;
-				$game.row++;
-			}),
-		);
-	},
+        guess.letters.forEach(({ char }) => used.add(char));
+        guess.reveal = true;
+        $game.row++;
+      }),
+    );
+  },
 };
